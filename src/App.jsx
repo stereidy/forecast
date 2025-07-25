@@ -1,6 +1,44 @@
 import React from 'react'
 
 const App = () => {
+  const [authenticated, setAuthenticated] = React.useState(false);
+  const [passwordInput, setPasswordInput] = React.useState('');
+  const correctPassword = 'Operation3XRevenue';
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (passwordInput === correctPassword) {
+      setAuthenticated(true);
+    } else {
+      alert('Incorrect password');
+    }
+  };
+
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#1a1a1a] p-8 rounded-lg border border-gray-800 max-w-md w-full text-center"
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-purple-300">Enter Password</h2>
+          <input
+            type="password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            placeholder="Password"
+            className="w-full p-3 mb-4 rounded bg-[#0a0a0a] border border-gray-700 text-white focus:outline-none focus:border-purple-500"
+          />
+          <button
+            type="submit"
+            className="bg-purple-600 hover:bg-purple-700 transition-colors px-4 py-2 rounded text-white font-medium w-full"
+          >
+            Enter
+          </button>
+        </form>
+      </div>
+    );
+  }
   // Data from the spreadsheet
   const forecastData = {
     currentARR: 590600,
